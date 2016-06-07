@@ -1,3 +1,11 @@
+/build/
+
+# logs
+node-debug.log
+
+# packages
 node_modules/
 bower_components/
+
+# IDEs
 .idea/
