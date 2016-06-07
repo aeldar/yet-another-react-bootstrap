@@ -8,10 +8,19 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 const config = {
   output: {
     path: 'build',
-    publicPath: '',
+    publicPath: '/',
     filename: 'scripts/[name]-[chunkhash].js',
   },
 };
+
+// TODO Refactor
+baseConfig.module.loaders.concat([
+  {
+    test: /\.jsx?$/,
+    exclude: /(node_modules|bower_components)/,
+    loader: 'babel',
+  },
+]);
 
 const plugins = [
   new webpack.DefinePlugin({

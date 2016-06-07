@@ -16,6 +16,15 @@ const config = {
   },
 };
 
+// TODO Refactor
+baseConfig.module.loaders.concat([
+  {
+    test: /\.jsx?$/,
+    exclude: /(node_modules|bower_components)/,
+    loader: 'react-hot!babel',
+  },
+]);
+
 const plugins = [
   new webpack.DefinePlugin({
     'process.env': {
