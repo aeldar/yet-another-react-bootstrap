@@ -1,0 +1,34 @@
+{
+  "name": "react-bootstrap",
+  "version": "0.0.1",
+  "description": "React bootstrap application. React, webpack, ES6/7, eslint, karma, mocha, chai, sinon, enzyme, browsersync.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/aeldar/yet-another-react-bootstrap.git"
+  },
+  "keywords": [
+    "react",
+    "webpack",
+    "bootstrap",
+    "scaffold",
+    "eslint",
+    "postcss",
+    "css",
+    "modules",
+    "ES2016",
+    "karma",
+    "mocha",
+    "chai",
+    "browsersync"
+  ],
+  "author": "Eldar Aliyev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aeldar/yet-another-react-bootstrap/issues"
+  },
+  "homepage": "https://github.com/aeldar/yet-another-react-bootstrap#readme"
+}
