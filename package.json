@@ -1,8 +1,8 @@
 {
-  "name": "react-bootstrap",
+  "name": "yet-another-react-bootstrap",
   "version": "0.0.1",
   "description": "React bootstrap application. React, webpack, ES6/7, eslint, karma, mocha, chai, sinon, enzyme, browsersync.",
-  "main": "index.js",
+  "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
