@@ -1,6 +1,3 @@
-// import webpack import 'webpack';
-// import path import 'path';
-
 import precss from 'precss';
 import stylelint from 'stylelint';
 import autoprefixer from 'autoprefixer';
@@ -14,7 +11,7 @@ export default {
 
   output: {
     path: 'build',
-    publicPath: '/',
+    publicPath: '',
     filename: 'scripts/[name].js',
   },
 
@@ -31,6 +28,8 @@ export default {
       },
     ],
   },
+
+  plugins: [],
 
   postcss() {
     return [

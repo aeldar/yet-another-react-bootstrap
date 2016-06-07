@@ -7,11 +7,9 @@ export default class App extends React.Component {
     name: React.PropTypes.string,
   };
 
-  getInitialState() {
-    return {
-      name: this.props.name || 'Dude',
-    };
-  }
+  state = {
+    name: this.props.name || 'Dude',
+  };
 
   render() {
     return (
