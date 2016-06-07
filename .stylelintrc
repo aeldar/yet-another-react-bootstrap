@@ -1,0 +1,7 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "string-quotes": "double",
+    "selector-pseudo-class-no-unknown": [true, { "ignorePseudoClasses": ["global", "local"] }]
+  }
+}

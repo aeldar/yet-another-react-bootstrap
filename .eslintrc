@@ -1,11 +1,15 @@
 {
   "parser": "babel-eslint",
+  "plugins": [
+    "mocha"
+  ],
   "extends": "airbnb",
   "globals": {
     "__DEV__": true
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "mocha": true
   },
   "rules": {
     "no-confusing-arrow": 0,
