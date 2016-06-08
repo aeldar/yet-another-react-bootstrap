@@ -35,7 +35,7 @@ const plugins = [
   new webpack.optimize.CommonsChunkPlugin('vendor', 'scripts/vendor.js'),
   new HtmlWebpackPlugin({
     title: 'My App (Development)',
-    template: 'pug-html!./src/index.pug',
+    template: 'pug-html!static/index.pug',
   }),
   new webpack.optimize.DedupePlugin(),
 ];

@@ -11,7 +11,7 @@ const src = path.join(root, 'src');
 const modules = path.join(root, 'node_modules');
 const modulesBower = path.join(root, 'bower_components');
 const dest = path.join(root, 'build');
-const staticSrc = path.join(src, 'static');
+const staticSrc = path.join(root, 'static');
 
 const cssModuleClassNameTemplate = '[name]__[local]__[hash:base64:5]';
 // no need anymore due to exclude/include options inside loaders
@@ -111,11 +111,15 @@ export default {
 
       // Media
       {
-        test: /\.(png|jpg|gif|woff|woff2)$/,
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'url?name=images/[name].[hash:base64:8].[ext]&limit=8192',
+      },
+      {
+        test: /\.(woff|woff2)$/,
         loader: 'url?limit=8192',
       },
       {
-        test: /\.(mp4|ogg|svg)$/,
+        test: /\.(mp4|ogg)$/,
         loader: 'file',
       },
     ],

@@ -1,10 +1,7 @@
 import React from 'react';
 
 import styles from './App.css';
-
-// require instead import is used to make eslint calm. That is more an exception than rule (I hope).
-require('static/styles/base.css');
-require('normalize.css');
+import batteryImg from './images/battery.svg';
 
 export default class App extends React.Component {
   static propTypes = {
@@ -18,7 +15,10 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className={styles.app}>Hi, {this.state.name}!</div>
+      <div className={styles.app}>
+        Hi, {this.state.name}!
+        <img src={batteryImg} alt="empty" width="64" />
+      </div>
     );
   }
 }

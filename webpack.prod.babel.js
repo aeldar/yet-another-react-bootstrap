@@ -9,7 +9,7 @@ const config = {
   output: {
     path: 'build',
     publicPath: '/',
-    filename: 'scripts/[name]-[chunkhash].js',
+    filename: 'scripts/[name].[chunkhash].js',
   },
 };
 
@@ -28,10 +28,10 @@ const plugins = [
       NODE_ENV: JSON.stringify('production'),
     },
   }),
-  new webpack.optimize.CommonsChunkPlugin('vendor', 'scripts/vendor-[chunkhash].js'),
+  new webpack.optimize.CommonsChunkPlugin('vendor', 'scripts/vendor.[chunkhash].js'),
   new HtmlWebpackPlugin({
     title: 'My App',
-    template: 'pug-html!./src/index.pug',
+    template: 'pug-html!static/index.pug',
   }),
   new webpack.optimize.DedupePlugin(),
 ];
