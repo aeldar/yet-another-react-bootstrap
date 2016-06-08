@@ -130,7 +130,7 @@ export default {
       static: staticSrc,
       components: path.join(src, 'components'),
       containers: path.join(src, 'containers'),
-      config: path.join(src, 'config'),
+      config: path.join(root, 'config'),
     },
   },
 
