@@ -9,7 +9,13 @@ import cssnano from 'cssnano';
 const root = path.resolve(__dirname);
 const src = path.join(root, 'src');
 const modules = path.join(root, 'node_modules');
+const modulesBower = path.join(root, 'bower_components');
 const dest = path.join(root, 'build');
+const staticSrc = path.join(src, 'static');
+
+const cssModuleClassNameTemplate = '[name]__[local]__[hash:base64:5]';
+// no need anymore due to exclude/include options inside loaders
+// const testCssExcludingStatic = /^(?![./]*static\/).+\.css$/;
 
 export default {
   entry: {
@@ -38,26 +44,72 @@ export default {
         exclude: /(node_modules|bower_components)/,
         loader: 'react-hot!babel',
       },
+
+      // CSS Modules part
       {
         test: /\.css$/,
-        loader: 'style!css?modules&localIdentName=[name]__[local]__[hash:base64:5]!postcss',
+        exclude: [staticSrc, /(node_modules|bower_components)/],
+        loader: `style!css?modules&localIdentName=${cssModuleClassNameTemplate}!postcss`,
       },
       {
         test: /\.sass/,
+        exclude: [staticSrc, /(node_modules|bower_components)/],
+        loaders: [
+          'style',
+          `css?modules&localIdentName=${cssModuleClassNameTemplate}`,
+          'postcss',
+          'sass?outputStyle=expanded&indentedSyntax',
+        ],
+      },
+      {
+        test: /\.scss/,
+        exclude: [staticSrc, /(node_modules|bower_components)/],
+        loaders: [
+          'style',
+          `css?modules&localIdentName=${cssModuleClassNameTemplate}`,
+          'postcss',
+          'sass?outputStyle=expanded',
+        ],
+      },
+      {
+        test: /\.less/,
+        exclude: [staticSrc, /(node_modules|bower_components)/],
+        loader: `style!css?modules&localIdentName=${cssModuleClassNameTemplate}!postcss!less`,
+      },
+      {
+        test: /\.styl/,
+        exclude: [staticSrc, /(node_modules|bower_components)/],
+        loader: `style!css?modules&localIdentName=${cssModuleClassNameTemplate}!postcss!stylus`,
+      },
+
+      // CSS without modules part
+      {
+        test: /\.css$/,
+        include: [staticSrc, /(node_modules|bower_components)/],
+        loader: 'style!css!postcss',
+      },
+      {
+        test: /\.sass/,
+        include: [staticSrc, /(node_modules|bower_components)/],
         loader: 'style!css!postcss!sass?outputStyle=expanded&indentedSyntax',
       },
       {
         test: /\.scss/,
+        include: [staticSrc, /(node_modules|bower_components)/],
         loader: 'style!css!postcss!sass?outputStyle=expanded',
       },
       {
         test: /\.less/,
+        include: [staticSrc, /(node_modules|bower_components)/],
         loader: 'style!css!postcss!less',
       },
       {
         test: /\.styl/,
+        include: [staticSrc, /(node_modules|bower_components)/],
         loader: 'style!css!postcss!stylus',
       },
+
+      // Media
       {
         test: /\.(png|jpg|gif|woff|woff2)$/,
         loader: 'url?limit=8192',
@@ -70,6 +122,17 @@ export default {
   },
 
   plugins: [],
+
+  // should be in main config as it is used by eslint to fix import/resolving
+  resolve: {
+    root: path.join(src, modules, modulesBower),
+    alias: {
+      static: staticSrc,
+      components: path.join(src, 'components'),
+      containers: path.join(src, 'containers'),
+      config: path.join(src, 'config'),
+    },
+  },
 
   postcss() {
     return [

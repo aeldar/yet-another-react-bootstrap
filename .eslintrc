@@ -18,5 +18,8 @@
       2,
       "prefer-double"
     ]
+  },
+  "settings": {
+    "import/resolver": "webpack"
   }
 }
