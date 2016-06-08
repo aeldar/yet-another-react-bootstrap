@@ -18,7 +18,7 @@ const config = {
 };
 
 // TODO Refactor
-baseConfig.module.loaders.concat([
+baseConfig.module.loaders = baseConfig.module.loaders.concat([
   {
     test: /\.jsx?$/,
     exclude: /(node_modules|bower_components)/,

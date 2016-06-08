@@ -80,9 +80,8 @@ export default {
     ],
     loaders: [
       {
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'react-hot!babel',
+        test: /\.json$/,
+        loader: 'json',
       },
 
       // CSS Modules part

@@ -55,6 +55,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.19.0",
+    "json-loader": "^0.5.4",
     "postcss": "^5.0.21",
     "postcss-loader": "^0.9.1",
     "precss": "^1.4.0",
