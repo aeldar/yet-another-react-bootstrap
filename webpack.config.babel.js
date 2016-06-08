@@ -48,17 +48,6 @@ const modulesBower = path.join(root, 'bower_components');
 const dest = path.join(root, 'build');
 const staticSrc = path.join(root, 'static');
 
-const myVars = {
-  paths: {
-    root,
-    src,
-    modules,
-    modulesBower,
-    dest,
-    staticSrc,
-  },
-};
-
 const classNameTpl = '[name]__[local]__[hash:base64:5]';
 // no need anymore due to exclude/include options inside loaders
 // const testCssExcludingStatic = /^(?![./]*static\/).+\.css$/;
@@ -190,8 +179,8 @@ const config = {
     }),
     new CopyWebpackPlugin(
       [
-        // { context: staticSrc, from: '*.{txt,ico}', to: myVars.paths.dest },
-        // { context: staticSrc, from: '.*', to: myVars.paths.dest },
+        // { context: staticSrc, from: '*.{txt,ico}', to: dest },
+        // { context: staticSrc, from: '.*', to: dest },
         { context: staticSrc, from: '**/*', to: dest, dot: true },
       ],
       {
@@ -240,7 +229,6 @@ const config = {
     ];
   },
 
-  myVars,
 };
 
 function addEnvSpecificOpts(baseConfig) {
