@@ -3,8 +3,7 @@ Yet another React.JS bootstrap application.
 
 TODO
 ----
-* fix eslint for tests (probably add 'env': 'mocha')
-
+* fix hash calculation for extracted styles in production mode.
 
 Static
 ------
