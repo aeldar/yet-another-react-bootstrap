@@ -7,9 +7,7 @@ import webpack from 'webpack';
 
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-const extractCSS = new ExtractTextPlugin('css/[name].[chunkhash].css');
 
 const config = {
   output: {
@@ -34,12 +32,18 @@ baseConfig.module.loaders.concat([
   if (!item.test.toString().match(/css/)) {
     return item;
   }
-  return Object.assign(
+  let o = Object.assign(
     {},
     item,
     { loader: extractCSS.extract((item.loader) ? item.loader : item.loaders) }
   );
-});*/
+  if (o.loaders) {
+    delete o.loaders;
+  }
+  return o;
+});
+
+console.log(baseConfig.module.loaders);*/
 
 // PLUGINS
 const plugins = [
@@ -54,16 +58,15 @@ const plugins = [
     template: 'pug-html!static/index.pug',
   }),
   new webpack.optimize.DedupePlugin(),
-  extractCSS,
   new CopyWebpackPlugin([
     { from: `${customVars.paths.staticSrc}/*.txt`, to: customVars.paths.dest },
     { from: `${customVars.paths.staticSrc}/*.ico` },
   ]),
   new webpack.optimize.UglifyJsPlugin({
     compress: {
-      warnings: false
-    }
-  })
+      warnings: false,
+    },
+  }),
 ];
 
 config.plugins = (baseConfig.plugins || []).concat(plugins);

@@ -5,6 +5,29 @@ import stylelint from 'stylelint';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 
+const isDev = process.env.NODE_ENV === 'development';
+
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+const extractCSS = new ExtractTextPlugin('styles/[name].[chunkhash].css', {
+  allChunks: true,
+});
+
+/**
+ * Normilises loader array into a string, adds 'style!' prefix for dev mode,
+ * or wraps into extractCSS.
+ * Attention! Don't use "loaders" property, instead use "loader", because this function normalises
+ * given loader array into a string!
+ * TODO refactor to remove extractCSS external dependency.
+ * @param loaderDefinition
+ * @returns {string|array}
+ */
+function extractCSSWrapper(loaderDefinition) {
+  const prefix = 'style!';
+  const loaderNormalised = (Array.isArray(loaderDefinition)) ?
+    loaderDefinition.join('!') : loaderDefinition;
+  return (isDev) ? prefix + loaderNormalised : extractCSS.extract(loaderDefinition);
+}
+
 // some path constants
 const root = path.resolve(__dirname);
 const src = path.join(root, 'src');
@@ -24,7 +47,7 @@ const customVars = {
   },
 };
 
-const cssModuleClassNameTemplate = '[name]__[local]__[hash:base64:5]';
+const classNameTpl = '[name]__[local]__[hash:base64:5]';
 // no need anymore due to exclude/include options inside loaders
 // const testCssExcludingStatic = /^(?![./]*static\/).+\.css$/;
 
@@ -60,64 +83,66 @@ export default {
       {
         test: /\.css$/,
         exclude: [staticSrc, /(node_modules|bower_components)/],
-        loader: `style!css?modules&localIdentName=${cssModuleClassNameTemplate}!postcss`,
+        loader: extractCSSWrapper(`css?modules&localIdentName=${classNameTpl}!postcss`),
       },
       {
         test: /\.sass/,
         exclude: [staticSrc, /(node_modules|bower_components)/],
-        loaders: [
-          'style',
-          `css?modules&localIdentName=${cssModuleClassNameTemplate}`,
+        // attention! we use "loader", not "loaders" for array,
+        // because extractCSSWrapper normalises it into a string.
+        // Also we don't use 'style-loader' for every css related loaders, because it is added
+        // by same extractCSSWrapper only in dev mode.
+        loader: extractCSSWrapper([
+          `css?modules&localIdentName=${classNameTpl}`,
           'postcss',
           'sass?outputStyle=expanded&indentedSyntax',
-        ],
+        ]),
       },
       {
         test: /\.scss/,
         exclude: [staticSrc, /(node_modules|bower_components)/],
-        loaders: [
-          'style',
-          `css?modules&localIdentName=${cssModuleClassNameTemplate}`,
+        loader: extractCSSWrapper([
+          `css?modules&localIdentName=${classNameTpl}`,
           'postcss',
           'sass?outputStyle=expanded',
-        ],
+        ]),
       },
       {
         test: /\.less/,
         exclude: [staticSrc, /(node_modules|bower_components)/],
-        loader: `style!css?modules&localIdentName=${cssModuleClassNameTemplate}!postcss!less`,
+        loader: extractCSSWrapper(`css?modules&localIdentName=${classNameTpl}!postcss!less`),
       },
       {
         test: /\.styl/,
         exclude: [staticSrc, /(node_modules|bower_components)/],
-        loader: `style!css?modules&localIdentName=${cssModuleClassNameTemplate}!postcss!stylus`,
+        loader: extractCSSWrapper(`css?modules&localIdentName=${classNameTpl}!postcss!stylus`),
       },
 
       // CSS without modules part
       {
         test: /\.css$/,
         include: [staticSrc, /(node_modules|bower_components)/],
-        loader: 'style!css!postcss',
+        loader: extractCSSWrapper('css!postcss'),
       },
       {
         test: /\.sass/,
         include: [staticSrc, /(node_modules|bower_components)/],
-        loader: 'style!css!postcss!sass?outputStyle=expanded&indentedSyntax',
+        loader: extractCSSWrapper('css!postcss!sass?outputStyle=expanded&indentedSyntax'),
       },
       {
         test: /\.scss/,
         include: [staticSrc, /(node_modules|bower_components)/],
-        loader: 'style!css!postcss!sass?outputStyle=expanded',
+        loader: extractCSSWrapper('css!postcss!sass?outputStyle=expanded'),
       },
       {
         test: /\.less/,
         include: [staticSrc, /(node_modules|bower_components)/],
-        loader: 'style!css!postcss!less',
+        loader: extractCSSWrapper('css!postcss!less'),
       },
       {
         test: /\.styl/,
         include: [staticSrc, /(node_modules|bower_components)/],
-        loader: 'style!css!postcss!stylus',
+        loader: extractCSSWrapper('css!postcss!stylus'),
       },
 
       // Media
@@ -136,7 +161,9 @@ export default {
     ],
   },
 
-  plugins: [],
+  plugins: [
+    extractCSS,
+  ],
 
   // should be in main config as it is used by eslint to fix import/resolving
   resolve: {
