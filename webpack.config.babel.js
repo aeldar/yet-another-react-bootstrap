@@ -13,20 +13,22 @@ const extractCSS = new ExtractTextPlugin('styles/[name].[chunkhash].css', {
 });
 
 /**
- * Normilises loader array into a string, adds 'style!' prefix for dev mode,
+ * Normalises loader array into a string, adds 'style!' prefix for dev mode,
  * or wraps into extractCSS.
  * Attention! Don't use "loaders" property, instead use "loader", because this function normalises
  * given loader array into a string!
- * TODO refactor to remove extractCSS external dependency.
  * @param loaderDefinition
  * @returns {string|array}
  */
-function extractCSSWrapper(loaderDefinition) {
-  const prefix = 'style!';
-  const loaderNormalised = (Array.isArray(loaderDefinition)) ?
-    loaderDefinition.join('!') : loaderDefinition;
-  return (isDev) ? prefix + loaderNormalised : extractCSS.extract(loaderDefinition);
-}
+const extractCSSWrapper = (function extractCSSWrapperFactory(extractCSSArg, isDevArg) {
+  return function extractCSSWrapperInner(loaderDefinition) {
+    const prefix = 'style!';
+    const loaderNormalised = (Array.isArray(loaderDefinition)) ?
+      loaderDefinition.join('!') : loaderDefinition;
+    return (isDevArg) ? prefix + loaderNormalised : extractCSSArg.extract(loaderDefinition);
+  };
+}(extractCSS, isDev));
+
 
 // some path constants
 const root = path.resolve(__dirname);
