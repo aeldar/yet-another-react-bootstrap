@@ -9,6 +9,7 @@ TODO
 * handle svg (sprites)
 * handle png sprites
 * handle fonts
+* add browsersync
 
 Static
 ------
