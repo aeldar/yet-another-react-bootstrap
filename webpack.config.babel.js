@@ -13,6 +13,17 @@ const modulesBower = path.join(root, 'bower_components');
 const dest = path.join(root, 'build');
 const staticSrc = path.join(root, 'static');
 
+const customVars = {
+  paths: {
+    root,
+    src,
+    modules,
+    modulesBower,
+    dest,
+    staticSrc,
+  },
+};
+
 const cssModuleClassNameTemplate = '[name]__[local]__[hash:base64:5]';
 // no need anymore due to exclude/include options inside loaders
 // const testCssExcludingStatic = /^(?![./]*static\/).+\.css$/;
@@ -148,4 +159,6 @@ export default {
       cssnano,
     ];
   },
+
+  customVars,
 };

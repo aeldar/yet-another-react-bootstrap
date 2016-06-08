@@ -14,6 +14,7 @@ const config = {
     // publicPath: defaultSettings.publicPath,
     noInfo: false,
   },
+  devtool: 'eval-source-map',
 };
 
 // TODO Refactor
@@ -26,6 +27,7 @@ baseConfig.module.loaders.concat([
 ]);
 
 const plugins = [
+  new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: JSON.stringify('development'),

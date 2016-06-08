@@ -1,9 +1,15 @@
 import baseConfig from './webpack.config.babel';
 
+const customVars = baseConfig.customVars;
+
 import webpack from 'webpack';
 // import path from 'path';
 
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+
+const extractCSS = new ExtractTextPlugin('css/[name].[chunkhash].css');
 
 const config = {
   output: {
@@ -14,6 +20,7 @@ const config = {
 };
 
 // TODO Refactor
+// add js/jsx loader
 baseConfig.module.loaders.concat([
   {
     test: /\.jsx?$/,
@@ -21,7 +28,20 @@ baseConfig.module.loaders.concat([
     loader: 'babel',
   },
 ]);
+// TODO refactor
+// apply extract-text-plugin for every css loader
+/*baseConfig.module.loaders = baseConfig.module.loaders.map((item) => {
+  if (!item.test.toString().match(/css/)) {
+    return item;
+  }
+  return Object.assign(
+    {},
+    item,
+    { loader: extractCSS.extract((item.loader) ? item.loader : item.loaders) }
+  );
+});*/
 
+// PLUGINS
 const plugins = [
   new webpack.DefinePlugin({
     'process.env': {
@@ -34,6 +54,16 @@ const plugins = [
     template: 'pug-html!static/index.pug',
   }),
   new webpack.optimize.DedupePlugin(),
+  extractCSS,
+  new CopyWebpackPlugin([
+    { from: `${customVars.paths.staticSrc}/*.txt`, to: customVars.paths.dest },
+    { from: `${customVars.paths.staticSrc}/*.ico` },
+  ]),
+  new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: false
+    }
+  })
 ];
 
 config.plugins = (baseConfig.plugins || []).concat(plugins);
