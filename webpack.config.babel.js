@@ -1,5 +1,8 @@
 import webpack from 'webpack';
 
+import addDevOptions from './tools/webpack.dev.babel';
+import addProdOptions from './tools/webpack.prod.babel';
+
 import path from 'path';
 
 import precss from 'precss';
@@ -7,7 +10,8 @@ import stylelint from 'stylelint';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 
-const isDev = process.env.NODE_ENV === 'development';
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const isDev = NODE_ENV === 'development';
 
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
@@ -60,7 +64,8 @@ const classNameTpl = '[name]__[local]__[hash:base64:5]';
 // no need anymore due to exclude/include options inside loaders
 // const testCssExcludingStatic = /^(?![./]*static\/).+\.css$/;
 
-export default {
+
+const config = {
   entry: {
     app: './src/app.js',
     vendor: ['react', 'react-dom'],
@@ -238,3 +243,16 @@ export default {
 
   myVars,
 };
+
+function addEnvSpecificOpts(baseConfig) {
+  switch (NODE_ENV) {
+    case 'development':
+      return addDevOptions(baseConfig);
+    case 'production':
+      return addProdOptions(baseConfig);
+    default:
+      throw Error(`ERROR: Unknown NODE_ENV value: ${NODE_ENV}`);
+  }
+}
+
+export default addEnvSpecificOpts(config);

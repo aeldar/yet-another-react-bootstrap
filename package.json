@@ -13,8 +13,8 @@
     "stylelint": "stylelint src/**/*.css",
     "lint": "npm run eslint && npm run stylelint",
     "clean": "rimraf build",
-    "build": "npm run clean && NODE_ENV=production webpack --config webpack.prod.babel.js --progress -p",
-    "start": "npm run clean && NODE_ENV=development webpack-dev-server --config webpack.dev.babel.js --hot --inline --progress",
+    "build": "npm run clean && NODE_ENV=production webpack --progress -p",
+    "start": "npm run clean && NODE_ENV=development webpack-dev-server --hot --inline --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
