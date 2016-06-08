@@ -214,13 +214,14 @@ export default {
   },
 
   devServer: {
-    contentBase: src,
+    contentBase: dest,
     historyApiFallback: true,
     hot: true,
     port: 3000,
     noInfo: false,
     stats: {
       chunks: false,
+      color: true,
     },
   },
 

@@ -10,6 +10,7 @@ TODO
 * handle png sprites
 * handle fonts
 * add browsersync
+* fix source maps for js and css
 
 Static
 ------
