@@ -10,6 +10,8 @@ import stylelint from 'stylelint';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 
+// set default env in case not specified (needed by tools like eslint to work without NODE_ENV)
+const NODE_ENV = process.env.NODE_ENV || 'development';
 const isDev = process.env.NODE_ENV === 'development';
 
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -232,13 +234,13 @@ const config = {
 };
 
 function addEnvSpecificOpts(baseConfig) {
-  switch (process.env.NODE_ENV) {
+  switch (NODE_ENV) {
     case 'development':
       return addDevOptions(baseConfig);
     case 'production':
       return addProdOptions(baseConfig);
     default:
-      throw Error(`ERROR: Unknown or undefined NODE_ENV value: ${process.env.NODE_ENV}`);
+      throw Error(`ERROR: Unknown NODE_ENV value: ${NODE_ENV}`);
   }
 }
 
