@@ -1,7 +1,7 @@
 import webpack from 'webpack';
 
-import addDevOptions from './tools/webpack.dev.babel';
-import addProdOptions from './tools/webpack.prod.babel';
+import addDevOptions from './tools/webpack.dev';
+import addProdOptions from './tools/webpack.prod';
 
 import path from 'path';
 
