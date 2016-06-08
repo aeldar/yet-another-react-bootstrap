@@ -23,7 +23,7 @@ export default class App extends React.Component {
     return (
       <div className={styles.app}>
         <p>Hi, {this.state.name}!</p>
-        <p>NODE_ENV: {__NODE_ENV__}</p>
+        <p>__NODE_ENV__: {__NODE_ENV__}</p>
         <p><img src={batteryImg} alt="empty" width="64" /></p>
         <p><input onChange={this.updateName} placeholder="Enter your name" /></p>
       </div>

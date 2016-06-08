@@ -4,6 +4,11 @@ Yet another React.JS bootstrap application.
 TODO
 ----
 * fix hash calculation for extracted styles in production mode.
+* set up testing env
+* set up code coverage reports
+* handle svg (sprites)
+* handle png sprites
+* handle fonts
 
 Static
 ------
