@@ -5,7 +5,8 @@
   ],
   "extends": "airbnb",
   "globals": {
-    "__DEV__": true
+    "__DEV__": true,
+    "__NODE_ENV__": true
   },
   "env": {
     "browser": true,

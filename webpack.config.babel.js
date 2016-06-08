@@ -1,3 +1,5 @@
+import webpack from 'webpack';
+
 import path from 'path';
 
 import precss from 'precss';
@@ -7,6 +9,7 @@ import cssnano from 'cssnano';
 
 const isDev = process.env.NODE_ENV === 'development';
 
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
@@ -167,7 +170,20 @@ export default {
   },
 
   plugins: [
+    new webpack.DefinePlugin({
+      // to remove ReactJS dev messages from production build
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+      },
+
+      // custom defined directives (should be surrounded with __ by convention)
+      __NODE_ENV__: JSON.stringify(process.env.NODE_ENV),
+    }),
     extractCSS,
+    new HtmlWebpackPlugin({
+      title: 'My App',
+      template: 'pug-html!static/index.pug',
+    }),
     new CopyWebpackPlugin(
       [
         // { context: staticSrc, from: '*.{txt,ico}', to: myVars.paths.dest },
@@ -182,6 +198,8 @@ export default {
         ],
       }
     ),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
   ],
 
   // should be in main config as it is used by eslint to fix import/resolving
@@ -192,6 +210,17 @@ export default {
       components: path.join(src, 'components'),
       containers: path.join(src, 'containers'),
       config: path.join(root, 'config'),
+    },
+  },
+
+  devServer: {
+    contentBase: src,
+    historyApiFallback: true,
+    hot: true,
+    port: 3000,
+    noInfo: false,
+    stats: {
+      chunks: false,
     },
   },
 

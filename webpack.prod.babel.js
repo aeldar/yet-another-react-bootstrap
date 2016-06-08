@@ -1,7 +1,6 @@
 import baseConfig from './webpack.config.babel';
 
 import webpack from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const config = {
   output: {
@@ -23,17 +22,7 @@ baseConfig.module.loaders = baseConfig.module.loaders.concat([
 
 // PLUGINS
 const plugins = [
-  new webpack.DefinePlugin({
-    'process.env': {
-      NODE_ENV: JSON.stringify('production'),
-    },
-  }),
   new webpack.optimize.CommonsChunkPlugin('vendor', 'scripts/vendor.[chunkhash].js'),
-  new HtmlWebpackPlugin({
-    title: 'My App',
-    template: 'pug-html!static/index.pug',
-  }),
-  new webpack.optimize.DedupePlugin(),
   new webpack.optimize.UglifyJsPlugin({
     compress: {
       warnings: false,

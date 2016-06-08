@@ -13,11 +13,19 @@ export default class App extends React.Component {
     name: this.props.name || 'Dude',
   };
 
+  updateName = (e) => {
+    this.setState({
+      name: (e.target.value) ? e.target.value : 'Dude',
+    });
+  };
+
   render() {
     return (
       <div className={styles.app}>
-        Hi, {this.state.name}!
-        <img src={batteryImg} alt="empty" width="64" />
+        <p>Hi, {this.state.name}!</p>
+        <p>NODE_ENV: {__NODE_ENV__}</p>
+        <p><img src={batteryImg} alt="empty" width="64" /></p>
+        <p><input onChange={this.updateName} placeholder="Enter your name" /></p>
       </div>
     );
   }
