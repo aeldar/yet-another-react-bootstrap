@@ -10,8 +10,7 @@ import stylelint from 'stylelint';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
-const isDev = NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === 'development';
 
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
@@ -245,13 +244,13 @@ const config = {
 };
 
 function addEnvSpecificOpts(baseConfig) {
-  switch (NODE_ENV) {
+  switch (process.env.NODE_ENV) {
     case 'development':
       return addDevOptions(baseConfig);
     case 'production':
       return addProdOptions(baseConfig);
     default:
-      throw Error(`ERROR: Unknown NODE_ENV value: ${NODE_ENV}`);
+      throw Error(`ERROR: Unknown or undefined NODE_ENV value: ${process.env.NODE_ENV}`);
   }
 }
 
