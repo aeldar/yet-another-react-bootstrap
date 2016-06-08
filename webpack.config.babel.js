@@ -7,8 +7,11 @@ import cssnano from 'cssnano';
 
 const isDev = process.env.NODE_ENV === 'development';
 
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+
 // prepare ExtractTextPlugin to extract CSS into a separate file for production build.
+// TODO fix hash. Currently chunkhash is the same as on app.js
 const extractCSS = new ExtractTextPlugin('styles/[name].[chunkhash].css', {
   allChunks: true,
 });
@@ -166,6 +169,19 @@ export default {
 
   plugins: [
     extractCSS,
+    new CopyWebpackPlugin(
+      [
+        // { context: staticSrc, from: '*.{txt,ico}', to: myVars.paths.dest },
+        // { context: staticSrc, from: '.*', to: myVars.paths.dest },
+        { context: staticSrc, from: '**/*', to: dest, dot: true },
+      ],
+      {
+        ignore: [
+          // ignore any style files and jade templates, but not js files
+          '*.{css,sass,scss,styl,less,pug}',
+        ],
+      }
+    ),
   ],
 
   // should be in main config as it is used by eslint to fix import/resolving

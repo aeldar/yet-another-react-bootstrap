@@ -1,13 +1,7 @@
 import baseConfig from './webpack.config.babel';
 
-const myVars = baseConfig.myVars;
-
 import webpack from 'webpack';
-// import path from 'path';
-
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
-
 
 const config = {
   output: {
@@ -40,10 +34,6 @@ const plugins = [
     template: 'pug-html!static/index.pug',
   }),
   new webpack.optimize.DedupePlugin(),
-  new CopyWebpackPlugin([
-    { from: `${myVars.paths.staticSrc}/*.txt`, to: myVars.paths.dest },
-    { from: `${myVars.paths.staticSrc}/*.ico` },
-  ]),
   new webpack.optimize.UglifyJsPlugin({
     compress: {
       warnings: false,
