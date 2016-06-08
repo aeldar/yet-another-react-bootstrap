@@ -8,6 +8,7 @@ import cssnano from 'cssnano';
 const isDev = process.env.NODE_ENV === 'development';
 
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+// prepare ExtractTextPlugin to extract CSS into a separate file for production build.
 const extractCSS = new ExtractTextPlugin('styles/[name].[chunkhash].css', {
   allChunks: true,
 });
