@@ -22,3 +22,6 @@ But it worth trying to reduce the usage of that method.
 Usage:
 
     import specialStyles from 'static/styles/special-styles.css';
+
+You can also make webpack ignore some of the files inside _/static_.
+Please, see webpack config looking for _CopyWebpackPlugin_

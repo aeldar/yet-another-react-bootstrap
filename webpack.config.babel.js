@@ -179,6 +179,7 @@ export default {
         ignore: [
           // ignore any style files and jade templates, but not js files
           '*.{css,sass,scss,styl,less,pug}',
+          'README.md',
         ],
       }
     ),
