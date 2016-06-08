@@ -1,6 +1,6 @@
 import baseConfig from './webpack.config.babel';
 
-const customVars = baseConfig.customVars;
+const myVars = baseConfig.myVars;
 
 import webpack from 'webpack';
 // import path from 'path';
@@ -26,24 +26,6 @@ baseConfig.module.loaders.concat([
     loader: 'babel',
   },
 ]);
-// TODO refactor
-// apply extract-text-plugin for every css loader
-/*baseConfig.module.loaders = baseConfig.module.loaders.map((item) => {
-  if (!item.test.toString().match(/css/)) {
-    return item;
-  }
-  let o = Object.assign(
-    {},
-    item,
-    { loader: extractCSS.extract((item.loader) ? item.loader : item.loaders) }
-  );
-  if (o.loaders) {
-    delete o.loaders;
-  }
-  return o;
-});
-
-console.log(baseConfig.module.loaders);*/
 
 // PLUGINS
 const plugins = [
@@ -59,8 +41,8 @@ const plugins = [
   }),
   new webpack.optimize.DedupePlugin(),
   new CopyWebpackPlugin([
-    { from: `${customVars.paths.staticSrc}/*.txt`, to: customVars.paths.dest },
-    { from: `${customVars.paths.staticSrc}/*.ico` },
+    { from: `${myVars.paths.staticSrc}/*.txt`, to: myVars.paths.dest },
+    { from: `${myVars.paths.staticSrc}/*.ico` },
   ]),
   new webpack.optimize.UglifyJsPlugin({
     compress: {

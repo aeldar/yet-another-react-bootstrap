@@ -39,7 +39,7 @@ const modulesBower = path.join(root, 'bower_components');
 const dest = path.join(root, 'build');
 const staticSrc = path.join(root, 'static');
 
-const customVars = {
+const myVars = {
   paths: {
     root,
     src,
@@ -190,5 +190,5 @@ export default {
     ];
   },
 
-  customVars,
+  myVars,
 };
