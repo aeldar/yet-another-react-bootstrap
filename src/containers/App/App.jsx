@@ -2,6 +2,7 @@ import React from 'react';
 
 import styles from './App.css';
 import batteryImg from './images/battery.svg';
+import killme from './app.json';
 
 export default class App extends React.Component {
   static propTypes = {
@@ -21,9 +22,9 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className={styles.app}>
+      <div className={styles.wrapper}>
         <p>Hi, {this.state.name}!</p>
-        <p>__NODE_ENV__: {__NODE_ENV__}</p>
+        <p>__NODE_ENV__: {__NODE_ENV__} {killme.killme}</p>
         <p><img src={batteryImg} alt="empty" width="64" /></p>
         <p><input onChange={this.updateName} placeholder="Enter your name" /></p>
       </div>

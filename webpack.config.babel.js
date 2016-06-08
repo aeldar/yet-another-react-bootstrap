@@ -2,6 +2,7 @@ import webpack from 'webpack';
 
 import addDevOptions from './tools/webpack.dev';
 import addProdOptions from './tools/webpack.prod';
+import addTestOptions from './tools/webpack.test';
 
 import path from 'path';
 
@@ -239,6 +240,8 @@ function addEnvSpecificOpts(baseConfig) {
       return addDevOptions(baseConfig);
     case 'production':
       return addProdOptions(baseConfig);
+    case 'test':
+      return addTestOptions(baseConfig);
     default:
       throw Error(`ERROR: Unknown NODE_ENV value: ${NODE_ENV}`);
   }
