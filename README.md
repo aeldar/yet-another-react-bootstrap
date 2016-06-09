@@ -1,17 +1,6 @@
 # yet-another-react-bootstrap
 Yet another React.JS bootstrap application.
 
-TODO
-----
-* fix hash calculation for extracted styles in production mode.
-* set up testing env
-* set up code coverage reports
-* handle svg (sprites)
-* handle png sprites
-* handle fonts
-* add browsersync
-* fix source maps for js and css
-
 Static
 ------
 Almost everything (including dot files) from _/static_ directory is copied to the _/build_
@@ -31,3 +20,12 @@ Usage:
 
 You can also make webpack ignore some of the files inside _/static_.
 Please, see webpack config looking for _CopyWebpackPlugin_
+
+TODO
+----
+* fix hash calculation for extracted styles in production mode.
+* handle svg (sprites)
+* handle png sprites
+* handle fonts
+* add browsersync
+* fix source maps for js and css

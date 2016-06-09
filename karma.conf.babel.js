@@ -29,18 +29,7 @@ export default (config) => {
     },
 
 // better to not specify plugins, as they required automatically by karma- names.
-/*    plugins: [
-      'karma-mocha',
-      'karma-chai',
-      'karma-sinon',
-      'karma-webpack',
-      'karma-phantomjs-launcher',
-      'karma-chrome-launcher',
-      'karma-firefox-launcher',
-      'karma-spec-reporter',
-      'karma-coverage',
-      'karma-sourcemap-loader',
-    ],*/
+//     plugins: [],
 
     reporters: ['spec', 'coverage'],
     // reporters: ['mocha'],
