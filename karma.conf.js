@@ -1,5 +1,5 @@
 require('babel-core/register');
-let webpackConfig = require('./webpack.config.babel').default;
+const webpackConfig = require('./webpack.config.babel').default;
 
 webpackConfig.externals = {
   'react/addons': true,
@@ -8,7 +8,7 @@ webpackConfig.externals = {
 };
 
 
-module.exports = function (config) {
+module.exports = (config) => {
   config.set({
     basePath: '',
     frameworks: ['mocha', 'chai'],
@@ -19,8 +19,8 @@ module.exports = function (config) {
 
     preprocessors: {
       // add webpack as preprocessor
-      'src/**/*.js': ['webpack'],
-      'src/**/*.jsx': ['webpack'],
+      'src/**/*.js': ['webpack', 'sourcemap'],
+      'src/**/*.jsx': ['webpack', 'sourcemap'],
     },
 
     webpack: webpackConfig,

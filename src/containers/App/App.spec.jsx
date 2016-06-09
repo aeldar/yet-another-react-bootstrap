@@ -11,6 +11,7 @@ import styles from './App.css';
 
 describe('<App />', () => {
   let wrapper;
+
   beforeEach(() => {
     wrapper = shallow(<App />);
   });
