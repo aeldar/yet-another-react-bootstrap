@@ -13,8 +13,7 @@ module.exports = (config) => {
     basePath: '',
     frameworks: ['mocha', 'chai'],
     files: [
-      'src/**/*.spec.jsx',
-      'src/**/*.spec.js',
+      'src/**/*.spec.{jsx,js}',
     ],
 
     preprocessors: {
