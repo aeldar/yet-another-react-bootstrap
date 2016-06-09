@@ -1,4 +1,7 @@
 /build/
+/coverage/
+/logs/
+/reports/
 
 # logs
 node-debug.log

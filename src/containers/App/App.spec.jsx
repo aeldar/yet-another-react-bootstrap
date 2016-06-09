@@ -1,10 +1,10 @@
 import React from 'react';
-import chai, { expect } from 'chai';
+import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
-import chaiEnzyme from 'chai-enzyme';
-
-chai.use(chaiEnzyme());
+// No need in these, because it is getting set up in test.webpack.prepare.js
+// import chaiEnzyme from 'chai-enzyme';
+// chai.use(chaiEnzyme());
 
 import App from './App.jsx';
 import styles from './App.css';
