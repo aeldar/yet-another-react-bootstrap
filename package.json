@@ -12,11 +12,11 @@
     "eslint": "eslint --ext .js,.jsx src",
     "stylelint": "stylelint src/**/*.css",
     "lint": "npm run eslint && npm run stylelint",
-    "clean": "rimraf build coverage",
-    "clean:coverage": "rimraf coverage",
+    "clean": "npm run clean:reports && rimraf build",
+    "clean:reports": "rimraf reports",
     "build": "npm run clean && NODE_ENV=production webpack --progress -p",
     "start": "npm run clean && NODE_ENV=development webpack-dev-server --hot --inline --progress",
-    "test": "npm run clean:coverage && NODE_ENV=test karma start --single-run --no-auto-watch",
+    "test": "npm run clean:reports && NODE_ENV=test karma start --single-run --no-auto-watch",
     "test:watch": "NODE_ENV=test karma start --no-single-run --auto-watch"
   },
   "repository": {

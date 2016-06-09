@@ -56,6 +56,7 @@ export default (config) => {
       noInfo: true,
     },
 
+    // TODO make conditional, remove reports on test:watch
     coverageReporter: {
       reporters: [
         // output report to console
@@ -64,8 +65,8 @@ export default (config) => {
         },
         {
           type: 'html',
-          dir: 'coverage/',
-          subdir: 'report-html',
+          dir: 'reports/',
+          subdir: 'coverage',
         },
       ],
     },
