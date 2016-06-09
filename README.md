@@ -1,6 +1,10 @@
 # yet-another-react-bootstrap
 Yet another React.JS bootstrap application.
 
+React, webpack, ES6/7, eslint, karma, mocha, chai, sinon, enzyme.
+
+See packages.json _scripts_ section for available commands.
+
 Static
 ------
 Almost everything (including dot files) from _/static_ directory is copied to the _/build_
