@@ -1,7 +1,7 @@
 {
   "name": "yet-another-react-bootstrap",
-  "version": "0.0.2",
-  "description": "React bootstrap application. React, webpack, ES6/7, eslint, karma, mocha, chai, sinon, enzyme, browsersync.",
+  "version": "0.1.0",
+  "description": "React bootstrap application. React, webpack, ES6/7, eslint, karma, mocha, chai, sinon, enzyme.",
   "private": true,
   "engines": {
     "node": ">=5.0 <7",
