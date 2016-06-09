@@ -1,4 +1,5 @@
 import webpack from 'webpack';
+import OpenBrowserPlugin from 'open-browser-webpack-plugin';
 
 const config = {
   devtool: 'eval-source-map',
@@ -15,6 +16,7 @@ const loaders = [
 const plugins = [
   new webpack.NoErrorsPlugin(),
   new webpack.optimize.CommonsChunkPlugin('vendor', 'scripts/vendor.js'),
+  new OpenBrowserPlugin({ url: 'http://localhost:3000' }),
 ];
 
 function addDevOptions(origConfig) {
