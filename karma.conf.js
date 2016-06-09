@@ -1,4 +1,6 @@
+// karma for the moment doesn't support es6/babel
 require('babel-core/register');
+// we need to take 'default' because webpack config uses es6 modules export.
 const webpackConfig = require('./webpack.config.babel').default;
 
 webpackConfig.externals = {
