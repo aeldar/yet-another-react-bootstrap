@@ -59,7 +59,7 @@ const classNameTpl = '[name]__[local]__[hash:base64:5]';
 const config = {
   entry: {
     app: './src/app.js',
-    vendor: ['react', 'react-dom'],
+    vendor: ['react', 'react-dom', 'react-router', 'redux', 'react-redux'],
   },
 
   output: {
