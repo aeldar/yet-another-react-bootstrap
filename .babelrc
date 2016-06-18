@@ -3,6 +3,11 @@
   "env": {
     "development": {
       "presets": ["react-hmre"]
+    },
+    "test": {
+      "plugins": [
+        ["__coverage__", {"ignore": "*.+(test|stub|spec).*"}]
+      ]
     }
   }
 }

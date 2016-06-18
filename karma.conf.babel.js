@@ -2,6 +2,8 @@
 // so this file should be used with the wrapper karma.conf.js.
 import webpackConfig from './webpack.config.babel';
 
+process.env.BABEL_ENV = 'test';
+
 webpackConfig.externals = {
   'react/addons': true,
   'react/lib/ExecutionEnvironment': true,
